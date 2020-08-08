@@ -6,29 +6,32 @@
 	String cp = request.getContextPath();
 %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>spring</title>
-
-<link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
-<link rel="stylesheet" href="<%=cp%>/resource/css/layout.css" type="text/css">
-
-<script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
-</head>
-
-<body>
-
-	<div class="header">
-		<jsp:include page="/WEB-INF/view/layout/header.jsp" />
+<div class="container">
+	<div class="body-container" style="width: 700px; margin-top: 20px;">
+		<img src="<%=cp%>/resource/images/main.jpg" id="mainImg">
 	</div>
-
-	<div class="container">
-		<div class="body-container" style="width: 700px; margin-top: 20px;">
-			메인 화면 입니다.
-		</div>
+	
+	<div id="shopping">
+		<table>
+			<tr>
+				<td rowspan="2">
+					<div id="container-left">가구</div>
+				</td>
+				<td>
+					<div id="container-up">상품</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="container-down">패브릭</div>
+				</td>
+			</tr>
+		</table>
+	
 	</div>
-
-</body>
-</html>
+	
+	<div  id="rank">
+		<span>인기상품</span>
+	</div>
+	
+</div>

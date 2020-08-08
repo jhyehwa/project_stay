@@ -43,6 +43,9 @@
 		<commons-pool2.version>2.7.0</commons-pool2.version>
 		<commons-fileupload.version>1.4</commons-fileupload.version>
 		<commons-io.version>2.6</commons-io.version>
+		
+		<!-- tiles -->
+		<tiles.version>3.0.8</tiles.version>
 
 	</properties>
 
@@ -201,5 +204,12 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
 		</dependency>
+		
+		<!-- Tiles  -->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>${tiles.version}</version>
+         </dependency>
 	</dependencies>
 </project>

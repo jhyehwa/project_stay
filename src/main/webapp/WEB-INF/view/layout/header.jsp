@@ -5,11 +5,11 @@
 <%
 	String cp = request.getContextPath();
 %>
-<div class="header-top" style="background: lime;">
+<div class="header-top">
 	<div class="header-left">
 		<p>
 			<a href="<%=cp%>/">
-				<span>Mini_Board</span>
+				<span><i class="fas fa-couch"></i>&nbsp;Furniture</span>
 			</a>
 		</p>
 	</div>

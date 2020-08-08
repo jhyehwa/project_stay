@@ -9,6 +9,6 @@ public class MainController {
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String method() {
-		return "main/main";
+		return ".mainLayout";
 	}
 }
