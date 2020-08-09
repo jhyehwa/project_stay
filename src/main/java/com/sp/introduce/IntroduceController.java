@@ -9,6 +9,6 @@ public class IntroduceController {
 
 	@RequestMapping(value = "/introduce/introduce", method = RequestMethod.GET)
 	public String method() {
-		return "introduce/introduce";
+		return ".introduce.introduce";
 	}
 }
