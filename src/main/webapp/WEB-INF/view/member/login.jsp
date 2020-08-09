@@ -18,10 +18,6 @@
 	}
 </script>
 
-<div class="header">
-    <jsp:include page="/WEB-INF/view/layout/header.jsp"/>
-</div>
-
 <div class="container">
 	<div class="body-container" style="width: 800px; margin-top: 50px;">
 		<div style="font-weight: bold; font-size: 25px; text-align: center; border-bottom: 1px solid black; padding-bottom: 15px;">

@@ -20,7 +20,7 @@ public class MemberController {
 	@RequestMapping(value = "/member/member", method = RequestMethod.GET)
 	public String memberForm(Model model) {
 		model.addAttribute("mode", "member");
-		return "member/member";
+		return ".member.member";
 	}
 
 	@RequestMapping(value = "/member/member", method = RequestMethod.POST)
@@ -55,7 +55,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String loginForm() {
-		return "member/login";
+		return ".member.login";
 	}
 
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
