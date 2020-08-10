@@ -18,8 +18,8 @@
 	<div class="header-right">
 		<div>
 			<a href="<%=cp%>/introduce/introduce">소개</a>
+			<a href="<%=cp%>/store/list">상점</a>
 			<a href="#">브랜드 소식</a>
-			<a href="#">상점</a>
 			<c:if test="${empty sessionScope.member}">
 				<a href="<%=cp%>/member/login">로그인</a>
 			</c:if>

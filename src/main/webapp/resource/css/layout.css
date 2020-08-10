@@ -39,8 +39,8 @@ body {
   right: 0;
   height: 75px;
   padding: 1rem;
-  color: white;
-  background: darkseagreen;
+  color: darkseagreen;
+  border-bottom: 2px solid darkseagreen;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
@@ -64,13 +64,13 @@ body {
 
 .header-left a {
 	padding-right: 50px;
-	color: white;
+	color: darkred;
 }
 
 .header-right a {
 	padding-right: 30px;
 	font-size: 15px;
-	color: white;
+	color: darkred;
 }
 
 .container #mainImg {
@@ -107,4 +107,8 @@ body {
 
 .container #rank {
 	height: 500px;
+}
+
+.container{
+	padding-top: 50px;
 }
