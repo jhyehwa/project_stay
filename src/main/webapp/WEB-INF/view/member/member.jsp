@@ -18,10 +18,6 @@
 	}
 </script>
 
-<div class="header">
-    <jsp:include page="/WEB-INF/view/layout/header.jsp"/>
-</div>
-
 <div class="container">
 	<div class="body-container" style="width: 800px; margin-top: 50px;">
 		<div style="font-weight: bold; font-size: 25px; text-align: center;">
@@ -29,8 +25,14 @@
 		</div>
 	
 		<div>
-			<form name="memberForm" method="post">
+			<form name="memberForm" method="post" enctype="multipart/form-data">
 				<table style="margin: 0 auto; margin-top: 20px;">
+					
+					<tr>
+						<td style="font-size: 20px;"><input value="프로필 사진(240*240)" disabled="disabled"></td>
+						<td><input type="file" name="upload" style="height: 30px; margin-bottom: 5px;"></td>
+					</tr>
+					
 					<tr>
 						<td style="font-size: 20px;">아이디&nbsp;&nbsp;&nbsp; </td>
 						<td><input type="text" name="id" value="${dto.id}" style="height: 30px; margin-bottom: 5px;"></td>
@@ -42,6 +44,18 @@
 					<tr>
 						<td style="font-size: 20px;">이름</td>
 						<td><input type="text" name="name" value="${dto.name}" style="height: 30px;"></td>
+					</tr>
+					<tr>
+						<td style="font-size: 20px;">전화번호</td>
+						<td><input type="text" name="tel" value="${dto.tel}" style="height: 30px;"></td>
+					</tr>
+					<tr>
+						<td style="font-size: 20px;">생년월일</td>
+						<td><input type="date" name="birth" value="${dto.birth}" style="height: 30px;"></td>
+					</tr>
+					<tr>
+						<td style="font-size: 20px;">주소</td>
+						<td><input type="text" name="address" value="${dto.address}" style="height: 30px;"></td>
 					</tr>
 				</table>
 				

@@ -19,34 +19,57 @@
 </script>
 
 <div class="container">
-	<div class="body-container" style="width: 100%; height : 500px;; margin-top: 50px;">
+	<div class="body-container" style="width: 100%; height: 500px;">
 		<div style="font-weight: bold; font-size: 25px; text-align: center; border-bottom: 1px solid black; padding-bottom: 15px;">
 			<span>로그인</span>
 		</div>
 		
+		<div style="float: left; margin-top: 10px;">
+			<div><img style="width: 600px; height: 600px;" src="../resource/images/login.jpg"></div>
+		</div>
+		
 		<form name="loginForm" method="post">
-			<table style="margin: 0 auto; margin-top: 40px;">
+			<table style="margin: 0 auto; margin-top: 150px; width: 400px;">
 				<tr>
+					<td style="width: 30%; height: 50px; text-align: center;">
+						<label style="font-size: 20px;">아이디</label>
+					</td>
 					<td>
-						<label style="font-size: 20px;">아이디&nbsp;&nbsp;&nbsp; </label>
-						<input type="text" name="id" style="height: 30px; margin-bottom: 5px;">
+						<input type="text" name="id" style="height: 30px; margin-bottom: 5px; border: none; border-bottom: 1px solid black; width: 250px;">
 					</td>
 				</tr>
 				<tr>
+					<td style="height: 50px; text-align: center;">
+						<label style="font-size: 20px;">비밀번호</label>
+					</td>
 					<td>
-						<label style="font-size: 20px;">비밀번호 </label>
-						<input type="text" name="pwd" style="height: 30px;">
+						<input type="text" name="pwd" style="height: 30px; margin-bottom: 5px; border: none; border-bottom: 1px solid black; width: 250px;">
 					</td>
 				</tr>
 				<tr>
-					<td style="padding-top: 20px;">
-						<button type="button" onclick="sendLogin();" style="background: antiquewhite; border: none; height: 40px; width: 100%; border-radius: 30px; font-size: 18px;">로그인</button>
+					<td style="padding-top: 20px; text-align: center;" colspan="2">
+						<button type="button" onclick="sendLogin();" style="background: antiquewhite; border: none; height: 40px; width: 70%; border-radius: 30px; font-size: 18px;">로그인</button>
 					</td>
-				</tr>
-				<tr>
-					<td>${message}</td>
 				</tr>
 			</table>
+			
+			<table style="width: 300px; margin: 0 auto; border-spacing: 0; border-collapse: none;">
+				<tr>
+					<td>
+						<button type="button" onclick="sendLogin();" style="background: none; border: none; height: 40px; width: 100px; font-size: 15px; margin-top: 10px;">회원가입</button>
+					</td>
+					<td>
+						<button type="button" onclick="sendLogin();" style="background: none; border: none; height: 40px; width: 100px; font-size: 15px; margin-top: 10px;">아이디 찾기</button>
+					</td>
+					<td>
+						<button type="button" onclick="sendLogin();" style="background: none; border: none; height: 40px; width: 100px; font-size: 15px; margin-top: 10px;">비밀번호 찾기</button>
+					</td>
+				</tr>
+			</table>
+			
+			<div style="width: 600px; float: left; margin-left: 50px;">
+				<div style="font-size: 17px; text-align: center; color: red;">${message}</div>
+			</div>
 		</form>
 	</div>
 </div>

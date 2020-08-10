@@ -9,7 +9,7 @@
 <style type="text/css">
 .banner {
 	position: relative;
-	width: 700px;
+	width: 1200px;
 	height: 500px;
 	top: 50px;
 	margin: 0 auto;
@@ -28,7 +28,7 @@
 
 .banner ul li {
 	float: left;
-	width: 700px;
+	width: 1200px;
 	height: 500px;
 	margin: 0;
 	padding: 0;
@@ -79,11 +79,11 @@
 			
 			<div class="banner">
 				<ul>
-					<li><img style="width: 700px; height: 500px;" src="../resource/images/introduce_Banner1.jpg"></li>
-					<li><img style="width: 700px; height: 500px;" src="../resource/images/introduce_Banner2.jpg"></li>
-					<li><img style="width: 700px; height: 500px;" src="../resource/images/introduce_Banner3.jpg"></li>
-					<li><img style="width: 700px; height: 500px;" src="../resource/images/introduce_Banner4.jpg"></li>
-					<li><img style="width: 700px; height: 500px;" src="../resource/images/introduce_Banner5.jpg"></li>
+					<li><img style="width: 1200px; height: 500px;" src="../resource/images/introduce_Banner1.jpg"></li>
+					<li><img style="width: 1200px; height: 500px;" src="../resource/images/introduce_Banner2.jpg"></li>
+					<li><img style="width: 1200px; height: 500px;" src="../resource/images/introduce_Banner3.jpg"></li>
+					<li><img style="width: 1200px; height: 500px;" src="../resource/images/introduce_Banner4.jpg"></li>
+					<li><img style="width: 1200px; height: 500px;" src="../resource/images/introduce_Banner5.jpg"></li>
 				</ul>
 			</div>
 
