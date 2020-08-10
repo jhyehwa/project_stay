@@ -10,14 +10,14 @@
 	<div class="header-left">
 		<p>
 			<a href="<%=cp%>/">
-				<span><i class="fas fa-couch"></i>&nbsp;Furniture</span>
-			</a>
+				<span style="font-size: xx-large; padding-left: 50%;">&nbsp;Furniture</span>
+			</a> 
 		</p>
 	</div>
 	
 	<div class="header-right">
 		<div>
-			<a href="#">소개</a>
+			<a href="<%=cp%>/introduce/introduce">소개</a>
 			<a href="#">브랜드 소식</a>
 			<a href="#">상점</a>
 			<c:if test="${empty sessionScope.member}">
@@ -25,16 +25,15 @@
 			</c:if>
 			
 			<c:if test="${not empty sessionScope.member}">
-				<span style="color: blue;">${sessionScope.member.name}</span>님
-                    &nbsp;|&nbsp;
+				<a href="#">장바구니</a>
+				<span><a href="<%=cp%>/member/pwd" style="color: purple;">${sessionScope.member.name}님</a></span>
+                    |&nbsp;
                     <a href="<%=cp%>/member/logout">로그아웃</a>
-                    &nbsp;|&nbsp;
-                    <a href="<%=cp%>/member/pwd">정보수정</a>
 					<c:if test="${sessionScope.member.id == 'admin'}">
                     	&nbsp;|&nbsp;
                     	<a href="<%=cp%>/admin">관리자</a>
                     </c:if>
-				<a href="#">장바구니</a>
+				
 			</c:if>
 		</div>
 	</div>

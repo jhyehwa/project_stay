@@ -27,8 +27,9 @@ body {
 
 .footer {
 	display: block;
-	height: 20%;
+	height: 11%;
 	margin-bottom: 0px;
+	position: absolute;
 }
 
 .header-top {
@@ -39,7 +40,7 @@ body {
   height: 75px;
   padding: 1rem;
   color: white;
-  background: teal;
+  background: darkseagreen;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
@@ -53,6 +54,7 @@ body {
 .header-right {
 	float: right;
 	padding-left: 50px;
+	padding-right: 50px;
 }
 
 .header a {
@@ -60,9 +62,15 @@ body {
 	font-size: 30px;
 }
 
-.header-right a {
+.header-left a {
 	padding-right: 50px;
-	font-size: 25px;
+	color: white;
+}
+
+.header-right a {
+	padding-right: 30px;
+	font-size: 15px;
+	color: white;
 }
 
 .container #mainImg {
