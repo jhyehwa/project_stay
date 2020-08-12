@@ -23,9 +23,9 @@
 	<h3>스토어</h3>
 	<c:forEach var="dto" items="${categoryList}">
 		<span> 
-			<a>
+			<a style="display: inline-block; margin-right: 50px;">
 			<img
-				src="<%=cp%>/resource/category/funiture.png" class="categoryImg"><br>
+				src="<%=cp%>/resource/category/${dto.saveFileName}" class="categoryImg"><br>
 				${dto.categoryName}
 			</a>
 		</span>

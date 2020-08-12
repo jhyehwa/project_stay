@@ -4,7 +4,7 @@
 <mapper namespace="store">
 	
 	<select id="categoryList" resultType="com.sp.store.StoreCategory">
-		SELECT categoryNum, categoryName 
+		SELECT categoryNum, categoryName, saveFileName
 		FROM storecategory
 	</select>
 	

@@ -3,6 +3,7 @@ package com.sp.store;
 public class StoreCategory {
 	private int categoryNum;
 	private String categoryName;
+	private String saveFileName;
 	
 	public int getCategoryNum() {
 		return categoryNum;
@@ -15,6 +16,12 @@ public class StoreCategory {
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	public String getSaveFileName() {
+		return saveFileName;
+	}
+	public void setSaveFileName(String saveFileName) {
+		this.saveFileName = saveFileName;
 	}
 	
 	

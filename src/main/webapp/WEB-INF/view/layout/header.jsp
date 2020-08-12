@@ -10,7 +10,7 @@
 	<div class="header-left">
 		<p>
 			<a href="<%=cp%>/">
-				<span style="font-size: xx-large; padding-left: 50%;">&nbsp;Furniture</span>
+				<span style="font-size: xx-large; padding-left: 100px;">&nbsp;머무르다</span>
 			</a> 
 		</p>
 	</div>
