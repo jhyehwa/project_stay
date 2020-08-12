@@ -16,21 +16,27 @@
 		f.action = "<%=cp%>/member/${mode}";		
 		f.submit();
 	}
+	
+
 </script>
 
 <div class="container">
-	<div class="body-container" style="width: 800px; margin-top: 50px;">
+	<div class="body-container" style="width: 100%; height: 500px;">
 		<div style="font-weight: bold; font-size: 25px; text-align: center;">
 			<h3>${mode == "member" ? "회원가입" : "회원정보수정"}</h3>
 		</div>
 	
 		<div>
 			<form name="memberForm" method="post" enctype="multipart/form-data">
-				<table style="margin: 0 auto; margin-top: 20px;">
-					
+				<div style="background: yellow; text-align: center; margin-top: 20px;">
+					<div style="width: 150px; height: 150px; font-size: 50px; margin: 0 auto; background: lime; border-radius: 150px;">
+						<img id="person" style="width: 50px; height: 50px;" src="../resource/images/person.png"><img src="">
+					</div>
+				</div>
+				
+				<table style="margin: 0 auto; margin-top: 20px; background: red;">						
 					<tr>
-						<td style="font-size: 20px;"><input value="프로필 사진(240*240)" disabled="disabled"></td>
-						<td><input type="file" name="upload" style="height: 30px; margin-bottom: 5px;"></td>
+						<td colspan="2"><input type="file" name="upload" id="select_img" style="height: 30px; margin-bottom: 5px;"></td>
 					</tr>
 					
 					<tr>

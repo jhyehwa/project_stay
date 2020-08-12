@@ -12,6 +12,8 @@ public class Member {
 	private String imageFileName;
 	private MultipartFile upload;
 
+	private String personImg;
+
 	public String getId() {
 		return id;
 	}
@@ -74,6 +76,14 @@ public class Member {
 
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
+	}
+
+	public String getPersonImg() {
+		return personImg;
+	}
+
+	public void setPersonImg(String personImg) {
+		this.personImg = personImg;
 	}
 
 }

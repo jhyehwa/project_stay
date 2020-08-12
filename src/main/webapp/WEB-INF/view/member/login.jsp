@@ -56,7 +56,7 @@
 			<table style="width: 300px; margin: 0 auto; border-spacing: 0; border-collapse: none;">
 				<tr>
 					<td>
-						<button type="button" onclick="sendLogin();" style="background: none; border: none; height: 40px; width: 100px; font-size: 15px; margin-top: 10px;">회원가입</button>
+						<button type="button" onclick="javascript:location.href='<%=cp%>/member/member';" style="background: none; border: none; height: 40px; width: 100px; font-size: 15px; margin-top: 10px;">회원가입</button>
 					</td>
 					<td>
 						<button type="button" onclick="sendLogin();" style="background: none; border: none; height: 40px; width: 100px; font-size: 15px; margin-top: 10px;">아이디 찾기</button>
