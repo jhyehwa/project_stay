@@ -8,11 +8,11 @@ public class Member {
 	private String name;
 	private String birth;
 	private String tel;
-	private String address;
+	private String zipAddress;
+	private String address1;
+	private String address2;
 	private String imageFileName;
 	private MultipartFile upload;
-
-	private String personImg;
 
 	public String getId() {
 		return id;
@@ -54,12 +54,28 @@ public class Member {
 		this.tel = tel;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getZipAddress() {
+		return zipAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setZipAddress(String zipAddress) {
+		this.zipAddress = zipAddress;
+	}
+
+	public String getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
 
 	public String getImageFileName() {
@@ -76,14 +92,6 @@ public class Member {
 
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
-	}
-
-	public String getPersonImg() {
-		return personImg;
-	}
-
-	public void setPersonImg(String personImg) {
-		this.personImg = personImg;
 	}
 
 }

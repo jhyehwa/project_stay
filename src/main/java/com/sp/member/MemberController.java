@@ -32,6 +32,14 @@ public class MemberController {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + "uploads" + File.separator + "member";
 
+			dto.setTel(dto.getTel().replaceAll("-", ""));
+
+			String tel1 = dto.getTel().substring(0, 3);
+			String tel2 = dto.getTel().substring(3, 7);
+			String tel3 = dto.getTel().substring(7);
+
+			dto.setTel(tel1 + "-" + tel2 + "-" + tel3);
+			
 			service.insertMember(dto, pathname);
 		} catch (Exception e) {
 			model.addAttribute("mode", "member");

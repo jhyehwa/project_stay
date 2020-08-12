@@ -33,5 +33,4 @@
 	<div  id="rank">
 		<span>인기상품</span>
 	</div>
-	
 </div>
