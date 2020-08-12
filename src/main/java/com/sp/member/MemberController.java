@@ -1,6 +1,8 @@
 package com.sp.member;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller("member.memberController")
@@ -153,6 +156,21 @@ public class MemberController {
 		model.addAttribute("mode", "update");
 		
 		return ".member.pwd";
+	}
+	
+	@RequestMapping(value = "/member/idCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> idCheck(@RequestParam String id) throws Exception {
+		String p = "true";
+		Member dto = service.readMember(id);
+		if(dto != null) {
+			p = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("passed", p);
+		
+		return model;
 	}
 
 }
