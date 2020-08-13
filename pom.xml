@@ -46,8 +46,27 @@
 		
 		<!-- tiles -->
 		<tiles.version>3.0.8</tiles.version>
+		
+		<!-- jackson -->
+		<jackson.version>2.9.9</jackson.version>
+		
+		<!-- org.json -->
+		<json.version>20180813</json.version>
 
 	</properties>
+	
+	<repositories>
+		<repository>
+			<id>ojdbc8</id>
+			<url>https://maven.xwiki.org/externals/</url>
+		</repository>
+
+		<!-- jai_codec/jai_code 레포지토리 -->
+		<repository>
+			<id>osgeo</id>
+			<url>https://repo.osgeo.org/repository/release/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 
@@ -211,5 +230,29 @@
             <artifactId>tiles-extras</artifactId>
             <version>${tiles.version}</version>
          </dependency>
+         
+         <!-- jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+	
+		<!-- JSON -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${json.version}</version>
+		</dependency>
 	</dependencies>
 </project>

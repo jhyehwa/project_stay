@@ -10,6 +10,67 @@
 	// 회원가입 유효성 검사
 	function memberOk() {
 		var f = document.memberForm;
+		var str;
+		
+		str = f.id.value;
+		str = str.trim();
+		if(!str) {
+			alert("아이디를 입력하세요. ");
+			f.id.focus();
+			return;
+		}
+		if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+			alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+			f.id.focus();
+			return;
+		}
+		f.id.value = str;
+
+		str = f.pwd.value;
+		str = str.trim();
+		if(!str) {
+			alert("패스워드를 입력하세요. ");
+			f.pwd.focus();
+			return;
+		}
+		
+		if(!/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str)) { 
+			alert("비밀번호는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.");
+			f.pwd.focus();
+			return;
+		}
+		f.pwd.value = str;
+
+		if(str!= f.pwdCheck.value) {
+	        alert("비밀번호가 일치하지 않습니다. ");
+	        f.pwdCheck.focus();
+	        return;
+		}
+		
+		str = f.name.value;
+		str = str.trim();
+	    if(!str) {
+	        alert("이름을 입력하세요.");
+	        f.name.focus();
+	        return;
+	    }
+	    f.name.value = str;
+	    
+	    str = f.birth.value;
+		str = str.trim();
+	    if(!str || !isValidDateFormat(str)) {
+	        alert("생년월일를 입력하세요[YYYY-MM-DD]. ");
+	        f.birth.focus();
+	        return;
+	    }
+	    
+	    str = f.tel.value;
+		str = str.trim();
+	    if(!str) {
+	        alert("전화번호를 입력하세요. ");
+	        f.tel.focus();
+	        return;
+	    }
 		
 		f.action = "<%=cp%>/member/${mode}";		
 		f.submit();
@@ -17,14 +78,14 @@
 	
 	// 아이디 중복체크
 	function idCheck() {
-	var str = $("#id").val();
-	str = str.trim();
-	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
-		$("#id").focus();
-		return;
-	}
-	
-	var url="<%=cp%>/member/idCheck";
+		var str = $("#id").val();
+		str = str.trim();
+		if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+			$("#id").focus();
+			return;
+		}
+		
+		var url = "<%=cp%>/member/idCheck";
 		var q = "id=" + str;
 
 		$.ajax({
@@ -34,11 +95,12 @@
 			dataType : "json",
 			success : function(data) {
 				var p = data.passed;
+				
 				if (p == "true") {
 					var s = "<span style='color:blue;font-weight:bold;'>" + str + "</span> 아이디는 사용 가능합니다.";
 					$("#id").parent().next(".help-block").html(s);
 				} else {
-					var s = "<span style='color:red;font-weight:bold;'>" + str + "</span> 아이디는 사용할 수 없습니다.";
+					var s = "<span style='color:yellow;font-weight:bold;'>" + str + "</span> 아이디는 사용할 수 없습니다.";
 					$("#id").parent().next(".help-block").html(s);
 					$("#id").val("");
 					$("#id").focus();
@@ -62,70 +124,91 @@
 	});
 </script>
 
-<div class="body-container" style="width: 100%; height: 500px; background: fuchsia;">
-	<div style="font-weight: bold; font-size: 25px; text-align: center; border-bottom: 1px solid black; padding-bottom: 15px;">
+<div class="body-container" style="width: 100%; height: 750px;">
+	<div style="font-weight: bold; font-size: 25px; text-align: center; border-bottom: 1px solid black; padding-bottom: 15px; margin-top: 50px;">
 		<h3>${mode == "member" ? "회원가입" : "회원정보수정"}</h3>
 	</div>
 	
-	<div style="background: gray; width: 1000px; margin: 0 auto;">
+	<div style="width: 1100px; margin: 0 auto;">
 		<form name="memberForm" method="post" enctype="multipart/form-data">
-			<div style="background: yellow; text-align: center; margin-top: 20px; float: left; width: 250px; height: 250px; margin-left: 20px;">
-				<div id="image_preview" style="width: 200px; height: 200px; font-size: 50px; margin: 0 auto; background: lime;">
-					<img id="preview" style="width: 180px; height: 180px; margin-top: 10px; margin-bottom: 10px;" src="../resource/images/person.png">
+			<div style="text-align: center; margin-top: 20px; float: left; width: 250px; height: 300px; margin-left: 20px;">
+				<div id="image_preview" style="width: 200px; height: 250px; font-size: 50px; margin: 0 auto;">
+					<img id="preview" style="width: 180px; height: 220px; margin-top: 10px; margin-bottom: 10px;" src="../resource/images/person.png">
 				</div>
-				<input type="file" name="upload" id="getfile" accept="image/*" style="margin-bottom: 5px; background: blue; margin-top: 10px;">
+				<input type="file" name="upload" id="getfile" accept="image/*" style="margin-bottom: 5px; margin-top: 10px;">
 			</div>
 			
-			<table style="margin: 0 auto; padding-top: 20px; background: red; width: 600px; height: 300px;">						
+			<table style="margin: 0 auto; padding-top: 20px; width: 800px; height: 300px;">						
 				<tr>
 					<td style="font-size: 20px;">아이디&nbsp;&nbsp;&nbsp; </td>
-					<td><p><input type="text" name="id" id="id" value="${dto.id}" onchange="idCheck();" style="height: 30px; margin-bottom: 5px;" ${mode == "update" ? "readonly = 'readonly'" : ""} maxlength="15"></p>
-					<p class="help-block">???</p></td>
+					<td>
+						<p>
+							<input type="text" name="id" id="id" value="${dto.id}" onchange="idCheck();" style="height: 30px; margin-bottom: 5px; margin-top: 20px;" ${mode == "update" ? "readonly = 'readonly'" : ""} maxlength="15">
+						</p>
+						<c:if test="${empty id}">
+							<p class="help-block">아이디는 5~10자 이내이며 첫 글자는 영문자로 시작해야 합니다.</p>
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;">비밀번호</td>
-					<td><input type="password" name="pwd" style="height: 30px; margin-bottom: 5px;"></td>
+					<td>
+						<p>
+							<input type="password" name="pwd" style="height: 30px; margin-bottom: 5px; margin-top: 20px;">
+						</p>
+						<p class="help-block">비밀번호는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</p>
+					</td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;">비밀번호 확인</td>
-					<td><input type="password" name="pwdCheck" style="height: 30px; margin-bottom: 5px;"></td>
-				</tr>
+					<td>
+						<p>
+							<input type="password" name="pwdCheck" style="height: 30px; margin-bottom: 5px; margin-top: 20px;">
+						</p>
+						<p class="help-block">비밀번호를 다시 입력 해주세요.</p>
+					</td>
+				</tr>				
 				<tr>
 					<td style="font-size: 20px;">이름</td>
-					<td><input type="text" name="name" value="${dto.name}" style="height: 30px;"></td>
+					<td><input type="text" name="name" value="${dto.name}" style="height: 30px; margin-top: 20px;"></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;">생년월일</td>
-					<td><input type="date" name="birth" value="${dto.birth}" style="height: 30px;"></td>
+					<td><input type="date" name="birth" value="${dto.birth}" style="height: 30px; margin-top: 20px;"></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;">전화번호</td>
-					<td><input type="text" name="tel" value="${dto.tel}" style="height: 30px;"></td>
+					<td><input type="text" name="tel" value="${dto.tel}" style="height: 30px; margin-top: 20px;"></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;">우편번호</td>
 					<td>
-						<input type="text" name="zipAddress" id="zipAddress" value="${dto.zipAddress}" readonly="readonly">
+						<input type="text" name="zipAddress" id="zipAddress" value="${dto.zipAddress}" readonly="readonly" style="margin-top: 20px;">
 						<button type="button" onclick="daumPostcode();">우편번호</button>
 					</td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;">주소</td>
 					<td>
-						<input type="text" name="address1" id="address1" value="${dto.address1}" style="height: 30px;">
-						<input type="text" name="address2" id="address2" value="${dto.address2}" style="height: 30px;">
+						<input type="text" name="address1" id="address1" value="${dto.address1}" style="width: 500px; height: 30px; margin-top: 20px;">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2">
+						<input type="text" name="address2" id="address2" value="${dto.address2}" style="width: 500px; height: 30px;">
 					</td>
 				</tr>
 				
 				<c:if test="${mode == 'member'}">
 					<tr>
 						<td style="font-size: 20px;">약관동의</td>
-						<td style="font-size: 15px;"><input type="checkbox" name="agree" checked="checked" onchange="form.sendButton.disabled = !checked"><a href="#">이용약관</a>에 동의합니다.</td>
+						<td style="font-size: 15px;"><input type="checkbox" name="agree" checked="checked" onchange="form.sendButton.disabled = !checked" style="margin-top: 20px;">&nbsp;&nbsp;<a href="#">이용약관</a>에 동의합니다.</td>
 					</tr>
 				</c:if>
 			</table>
 			
-			<script type="text/javascript">
+			<script type="text/javascript">			
 				var file = document.querySelector('#getfile');
 
 				file.onchange = function () {

@@ -5,4 +5,6 @@ public interface MemberService {
 	
 	public Member loginMember(String id);
 	public Member readMember(String id);
+	
+	public void updateMember(Member dto) throws Exception;
 }

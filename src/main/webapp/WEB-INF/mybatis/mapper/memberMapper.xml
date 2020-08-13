@@ -3,12 +3,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 	<insert id="insertMember" parameterType="com.sp.member.Member">
-		INSERT INTO member(imageFileName, id, pwd, name, tel, birth, address) VALUES(#{imageFileName}, #{id}, #{pwd}, #{name}, #{tel}, #{birth}, #{address})
+		INSERT INTO member(imageFileName, id, pwd, name, birth, tel, zipAddress, address1, address2)
+		VALUES(#{imageFileName}, #{id}, #{pwd}, #{name}, #{birth}, #{tel}, #{zipAddress}, #{address1}, #{address2})
 	</insert>
 	
 	<select id="loginMember" parameterType="String" resultType="com.sp.member.Member">
 		SELECT id, pwd, name
 		FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<select id="readMember" parameterType="String" resultType="com.sp.member.Member">
+		SELECT id, pwd, name, birth, tel, zipAddress, address1, address2
+		FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<select id="updateMember" parameterType="String" resultType="com.sp.member.Member">
+		UPDATE member SET pwd = #{pwd}, name = #{name}, birth = #{birth}, tel = ${tel}, zipAddress = #{zipAddress}, address1 = #{address1}, address2 = #{address2}
 		WHERE id = #{id}
 	</select>
 </mapper>

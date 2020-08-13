@@ -20,7 +20,7 @@
 
 <div class="container">
 	<div class="body-container" style="width: 100%; height: 500px;">
-		<div style="font-weight: bold; font-size: 25px; text-align: center; border-bottom: 1px solid black; padding-bottom: 15px;">
+		<div style="font-weight: bold; font-size: 25px; text-align: center; border-bottom: 1px solid black; margin-top: 50px; padding-bottom: 15px;">
 			<span>로그인</span>
 		</div>
 		

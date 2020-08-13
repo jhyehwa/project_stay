@@ -27,7 +27,7 @@
 
 <div class="container">
 	<div class="body-container" style="width: 100%; height: 500px;">
-		<div style="font-weight: bold; font-size: 25px; text-align: center; border-bottom: 1px solid black; padding-bottom: 15px;">
+		<div style="font-weight: bold; font-size: 25px; text-align: center; border-bottom: 1px solid black; padding-bottom: 15px; margin-top: 50px;">
 			<span>비밀번호 확인</span>
 		</div>
 		
@@ -49,6 +49,9 @@
 						<button type="button" onclick="sendOk();" style="background: antiquewhite; border: none; height: 30px; width: 300px; border-radius: 30px; font-size: 18px; margin-top: 20px;">확인</button>
 						<input type="hidden" name="mode" value="${mode}">
 					</td>
+				</tr>
+				<tr style="width: 600px; margin-left: 50px;">
+					<td style="font-size: 17px; text-align: center; color: red;">${message}</td>
 				</tr>
 			</table>
 		</form>

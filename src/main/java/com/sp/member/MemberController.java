@@ -155,13 +155,14 @@ public class MemberController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("mode", "update");
 		
-		return ".member.pwd";
+		return ".member.member";
 	}
 	
 	@RequestMapping(value = "/member/idCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> idCheck(@RequestParam String id) throws Exception {
 		String p = "true";
+		
 		Member dto = service.readMember(id);
 		if(dto != null) {
 			p = "false";
@@ -173,4 +174,21 @@ public class MemberController {
 		return model;
 	}
 
+	@RequestMapping(value = "/member/update", method = RequestMethod.POST)
+	public String updateSubmit(Member dto, final RedirectAttributes reAttr, Model model) {
+
+		try {
+			service.updateMember(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(dto.getName() + "님의 정보가 정상적으로 변경되었습니다.");
+
+		reAttr.addFlashAttribute("title", "회원 정보 수정");
+		reAttr.addFlashAttribute("message", sb.toString());
+
+		return "redirect:/member/complete";
+	}
 }

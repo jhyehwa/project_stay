@@ -19,11 +19,10 @@ public class MemberServiceImpl implements MemberService {
 	public void insertMember(Member dto, String pathname) throws Exception {
 
 		try {
-
-			if(dto.getUpload() != null && ! dto.getUpload().isEmpty()) {
+			if (dto.getUpload() != null && !dto.getUpload().isEmpty()) {
 				String newFileName = fileManager.doFileUpload(dto.getUpload(), pathname);
-				dto.setImageFileName(newFileName);				
-				dao.insertData("member.insertMember", dto);				
+				dto.setImageFileName(newFileName);
+				dao.insertData("member.insertMember", dto);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,8 +46,27 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member readMember(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Member dto = null;
+
+		try {
+			dto = dao.selectOne("member.readMember", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
+
+	@Override
+	public void updateMember(Member dto) throws Exception {
+
+		try {
+			dao.updateData("member.updateMember", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+
 	}
 
 }
