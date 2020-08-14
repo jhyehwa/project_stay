@@ -32,4 +32,9 @@ public class StoreController {
 		return ".store.list";
 	}
 	
+	@RequestMapping(value="created", method=RequestMethod.GET)
+	public String created(Model model) {
+		return ".store.created";
+	}
+	
 }

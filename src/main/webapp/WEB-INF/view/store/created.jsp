@@ -32,39 +32,14 @@ td img{
 
 <div style="width: 100%; margin: 50px auto; text-align: center;">
 	<h3 style="margin: 10px auto;">스토어</h3>
-	<c:forEach var="dto" items="${categoryList}">
-		<span> 
-			<a style="display: inline-block; margin-right: 10px;">
-			<img
-				src="<%=cp%>/resource/category/${dto.saveFileName}" class="categoryImg"><br>
-				${dto.categoryName}
-			</a>
-		</span>
-	</c:forEach>
+	
 </div>
 
 <div  style="width: 100%; margin: 50px auto; text-align: center;">
 	<table>
 		<tr style="width: 100%; height: 300px; padding: 0px auto;">
 			<td>
-				<img src="<%=cp%>/resource/images/furniture.jpg">
-				<p>화분</p>
-				<p>\35000</p>
-			</td>
-			<td>
-				<img src="<%=cp%>/resource/images/furniture.jpg">
-				<p>화분</p>
-				<p>\35000</p>
-			</td>
-			<td>
-				<img src="<%=cp%>/resource/images/furniture.jpg">
-				<p>화분</p>
-				<p>\35000</p>
-			</td>
-			<td>
-				<img src="<%=cp%>/resource/images/furniture.jpg">
-				<p>화분</p>
-				<p>\35000</p>
+			
 			</td>
 		</tr>
 	</table>
