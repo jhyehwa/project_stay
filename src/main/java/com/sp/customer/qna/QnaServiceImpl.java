@@ -13,29 +13,36 @@ public class QnaServiceImpl implements QnaService {
 
 	@Autowired
 	private CommonDAO dao;
-	
+
+	@Override
+	public List<Qna> listQna(Map<String, Object> map) {
+		List<Qna> list = null;
+
+		try {
+			list = dao.selectList("qna.listQna", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 	@Override
 	public void insertQna(Qna dto) throws Exception {
-		
+
 		try {
 			dao.insertData("qna.insertQna", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		
-		return 0;
-	}
 
-	@Override
-	public List<Qna> listQna(Map<String, Object> map) {
-		
-		return null;
+		return 0;
 	}
 
 }
