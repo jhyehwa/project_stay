@@ -80,6 +80,6 @@ public class QnaController {
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 
-		return "customer.qna.list";
+		return "customer/qna/list";
 	}
 }
