@@ -45,4 +45,17 @@ public class QnaServiceImpl implements QnaService {
 		return 0;
 	}
 
+	@Override
+	public List<Qna> listCategory() {
+		List<Qna> list = null;
+		
+		try {
+			list = dao.selectList("qna.listCategory");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 }

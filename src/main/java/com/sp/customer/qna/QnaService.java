@@ -8,4 +8,6 @@ public interface QnaService {
 	
 	public int dataCount(Map<String, Object> map);
 	public List<Qna> listQna(Map<String, Object> map);
+	
+	public List<Qna> listCategory();
 }

@@ -20,6 +20,128 @@
 			reloadQna(1);
 		});
 	});
+	
+	function ajaxJSON(url, type, query, fn) {
+		$.ajax({
+			type: type,
+			url: url,
+			data: query,
+			dataType: "json",
+			success: function(data) {
+				fn(data);
+			},
+			beforeSend: function(jqXHR) {
+				if(jqXHR.status == 403) {
+					login();
+					return false;
+				}
+				console.log(jqXHR.responseText);
+			}
+		});
+	}
+	
+	function ajaxHTML(url, type, query, selector) {
+		$.ajax({
+			type : type,
+			url : url,
+			data : query,
+			success : function(data) {
+				if ($.trim(data) == "error") {
+					listPage(1);
+					return false;
+				}
+				$(selector).html(data);
+			},
+			beforeSend : function(jqXHR) {
+				jqXHR.setRequestHeader("AJAX", true);
+			},
+			error : function(jqXHR) {
+				if (jqXHR.status == 403) {
+					login();
+					return false;
+				}
+				console.log(jqXHR.responseText);
+			}
+		});
+	}
+	
+	function ajaxFileJSON(url, type, query, fn) {
+		$.ajax({
+			type : type,
+			url : url,
+			processData : false // file 전송시 필수
+			,
+			contentType : false // file 전송시 필수
+			,
+			data : query,
+			dataType : "json",
+			success : function(data) {
+				fn(data);
+			},
+			beforeSend : function(jqXHR) {
+				jqXHR.setRequestHeader("AJAX", true);
+			},
+			error : function(jqXHR) {
+				if (jqXHR.status == 403) {
+					login();
+					return false;
+				}
+				console.log(jqXHR.responseText);
+			}
+		});
+	}
+	
+	// 글쓰기폼
+	function insertForm() {
+		var $tab = $(".tabs .active");
+		var tab = $tab.attr("data-tab");
+		
+		var url = "<%=cp%>/customer/"+tab+"/created";
+		var query = "tmp=" + new Date().getTime();
+		var selector = "#tab-content";
+		
+		ajaxHTML(url, "get", query, selector);
+	}
+
+	// 글 등록, 수정
+	function sendOk(mode, page) {
+		/* var tab = $tab.attr("data-tab"); */
+		var f = document.qnaForm;
+		var str = f.subject.value;
+		if (!str) {
+			alert("제목을 입력해주세요.");
+			f.subject.focus();
+			return;
+		}
+
+		str = f.content.value;
+		if (!str) {
+			alert("내용을 입력해주세요.");
+			f.content.focus();
+			return;
+		}
+
+		var url = "<%=cp%>/customer/"+tab+"/"+mode;
+		var query = new FormDate(f);
+		
+		var fn = function(data) {
+			var state = data.state;
+			if(state == "false") {
+				alert("게시물을 추가하지 못했습니다.");
+			}
+			
+			if(page == undefined || page == "") {
+				page = "1";
+			}
+			
+			if(mode == "created") {
+				reloadQna();
+			} else {
+				listPage(page);
+			}
+		};
+		ajaxFileJSON(url, "post", query, fn);
+	}
 </script>
 
 <div class="body-container" style="width: 800px;">

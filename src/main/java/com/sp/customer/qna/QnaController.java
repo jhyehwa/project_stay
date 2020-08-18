@@ -6,14 +6,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.common.MyUtil;
+import com.sp.member.SessionInfo;
 
 @Controller("customer.qna.qnaController")
 @RequestMapping(value = "/customer/qna/*")
@@ -80,6 +84,36 @@ public class QnaController {
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 
-		return "customer/qna/list";
+		return ".customer.qna.list";
+	}
+	
+	@RequestMapping(value = "created", method = RequestMethod.GET)
+	public String createdForm(Model model) throws Exception {
+		List<Qna> listCategory = service.listCategory();
+
+		model.addAttribute("pageNo", "1");
+		model.addAttribute("listCategory", listCategory);
+		model.addAttribute("mode", "created");
+
+		return ".customer.qna.created";
+	}
+
+	@RequestMapping(value = "created", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createdSubmit(Qna dto, HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String state = "true";
+
+		try {
+			dto.setId(info.getId());
+			service.insertQna(dto);
+		} catch (Exception e) {
+			state = "false";
+		}
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+
+		return model;
 	}
 }

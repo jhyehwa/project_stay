@@ -6,7 +6,7 @@
 	String cp=request.getContextPath();
 %>
 
-<table>
+<table style="margin-top: 50px;">
 	<tr>
 		<th>번호</th>
 		<th>유형</th>
