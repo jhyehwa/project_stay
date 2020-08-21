@@ -26,3 +26,33 @@
 		<tr>
 	</c:forEach>
 </table>
+
+<table>
+	<tr>
+		<td>${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<td>
+			<button type="button" onclick="reloadQna();">새로고침</button>
+		</td>
+		<td>
+			<form name="searchForm" method="post">
+				<select>
+					<option>모두</option>
+					<option>제목</option>
+					<option>내용</option>
+					<option>작성자</option>
+					<option>작성일</option>
+				</select>
+				<input type="text">
+				<button type="button" onclick="searchList();">검색</button>
+			</form>
+		</td>
+		<td>
+			<button type="button" onclick="insertForm();">글올리기</button>
+		</td>
+	</tr>
+</table>

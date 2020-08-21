@@ -56,7 +56,7 @@
 	<table>
 		<tr>
 			<td>
-				<button type="button" onclick="sendOk('${mode}', '${pageNo}');">${mode == 'update' ? '수정완료' : '등록하기'}</button>
+				<button type="button" onclick="sendOk('${mode}', '${pageNo}');">${mode=='update'?'수정완료':'등록하기'}</button>
 				<button type="reset">다시입력</button>
 				<button type="button" onclick="sendCancel('${pageNo}');">${mode == 'update' ? '수정취소' : '등록취소'}</button>
 				<c:if test="${mode == 'update'}">

@@ -6,8 +6,12 @@
 	String cp = request.getContextPath();
 %>
 
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
 	$(function(){
+		$("#tab-notice").addClass("active");
+		listPage(1);
+		
 		$("ul.tabs li").click(function(){
 			tab = $(this).attr("data-tab");
 			
@@ -17,7 +21,7 @@
 			
 			$("#tab-" + tab).addClass("active");
 			
-			reloadQna(1);
+			reloadQna();
 		});
 	});
 	
@@ -69,10 +73,8 @@
 		$.ajax({
 			type : type,
 			url : url,
-			processData : false // file 전송시 필수
-			,
-			contentType : false // file 전송시 필수
-			,
+			processData : false,
+			contentType : false,
 			data : query,
 			dataType : "json",
 			success : function(data) {
@@ -91,6 +93,31 @@
 		});
 	}
 	
+	// 글 리스트 및 페이징 처리
+	function listPage(page) {
+		var $tab = $(".tabs .active");
+		var tab = $tab.attr("data-tab");
+		
+		var url = "<%=cp%>/customer/"+tab+"/list";
+		var query = "pageNo=" + page;
+		var search = $('form[name=customerSearchForm]').serialize();
+		
+		query = query + "&" + search;
+		
+		var selector = "#tab-content";
+		
+		ajaxHTML(url, "get", query, selector);
+	}
+	
+	// 새로고침
+	function reloadQna() {
+		var f = document.customerSearchForm;
+		f.condition.value = "all";
+		f.keyword.value = "";
+		
+		listPage(1);
+	}
+	
 	// 글쓰기폼
 	function insertForm() {
 		var $tab = $(".tabs .active");
@@ -105,8 +132,11 @@
 
 	// 글 등록, 수정
 	function sendOk(mode, page) {
-		/* var tab = $tab.attr("data-tab"); */
+		var $tab = $(".tabs .active");
+		var tab = $tab.attr("data-tab");
+		
 		var f = document.qnaForm;
+		
 		var str = f.subject.value;
 		if (!str) {
 			alert("제목을 입력해주세요.");
@@ -134,7 +164,7 @@
 				page = "1";
 			}
 			
-			if(mode == "created") {
+			if(mode == "created" || mode == "reply") {
 				reloadQna();
 			} else {
 				listPage(page);
