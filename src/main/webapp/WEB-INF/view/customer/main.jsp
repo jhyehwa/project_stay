@@ -152,7 +152,7 @@
 		}
 
 		var url = "<%=cp%>/customer/"+tab+"/"+mode;
-		var query = new FormDate(f);
+		var query = new FormData(f);
 		
 		var fn = function(data) {
 			var state = data.state;

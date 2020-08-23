@@ -10,7 +10,7 @@
 	
 	<insert id="insertQna" parameterType="com.sp.customer.qna.Qna">
 		INSERT INTO qna(num, categoryNum, questionPrivate, subject, content, id, parent, created)
-		VALUES(qna_seq.NEXTVAL, #{categoryNum}, #{questionPrivate}, #{subject}, #{content}, #{id}, #{parent, jdbcType=INTEGER}, SYSDATE})
+		VALUES(qna_seq.CURRVAL, #{categoryNum}, #{questionPrivate}, #{subject}, #{content}, #{id}, #{parent, jdbcType=INTEGER}, SYSDATE)
 	</insert>
 	
 	<select id="listCategory" resultType="com.sp.customer.qna.Qna">
