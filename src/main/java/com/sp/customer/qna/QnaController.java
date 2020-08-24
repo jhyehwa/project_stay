@@ -84,7 +84,7 @@ public class QnaController {
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 
-		return ".customer.qna.list";
+		return "customer/qna/list";
 	}
 	
 	@RequestMapping(value = "created", method = RequestMethod.GET)
@@ -115,5 +115,53 @@ public class QnaController {
 		model.put("state", state);
 
 		return model;
+	}
+	
+	@RequestMapping(value = "article")
+	public String article(
+			@RequestParam int num,
+			@RequestParam String pageNo,
+			@RequestParam(defaultValue = "all") String condition,
+			@RequestParam(defaultValue = "") String keyword,
+			HttpServletRequest req,
+			HttpSession session,
+			Model model) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		if (req.getMethod().equalsIgnoreCase("GET")) {
+			keyword = URLDecoder.decode(keyword, "UTF-8");
+		}
+		
+		Qna qnaDto = service.readQna(num);
+		if (qnaDto == null) {
+			return "customer/error";
+		}
+		
+		if (qnaDto.getQuestionPrivate() == 1 && (! info.getId().equals("admin") && ! info.getId().equals(qnaDto.getId()))) {
+			return "customer/error";
+		}
+		
+		qnaDto.setContent(qnaDto.getContent().replaceAll("\n", "<br>"));
+		
+		Qna answerDto = service.readAnswer(qnaDto.getNum());
+		if (answerDto != null) {
+			answerDto.setContent(answerDto.getContent().replaceAll("\n", "<br>"));
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("num", qnaDto.getNum());
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		Qna preReadDto = service.preReadQuestion(map);
+		Qna nextReadDto = service.nextReadQuestion(map);
+		
+		model.addAttribute("qnaDto", qnaDto);
+		model.addAttribute("answerDto", answerDto);
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
+		model.addAttribute("pageNo", pageNo);
+		
+		return "customer/qna/article";
 	}
 }

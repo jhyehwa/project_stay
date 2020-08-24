@@ -10,4 +10,10 @@ public interface QnaService {
 	public List<Qna> listQna(Map<String, Object> map);
 	
 	public List<Qna> listCategory();
+	
+	public Qna readQna(int num);
+	public Qna readAnswer(int parent);
+	
+	public Qna preReadQuestion(Map<String, Object> map);
+	public Qna nextReadQuestion(Map<String, Object> map);
 }

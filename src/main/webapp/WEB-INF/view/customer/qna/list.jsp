@@ -20,6 +20,19 @@
 		<tr>
 			<td>${dto.listNum}</td>
 			<td>${dto.category}</td>
+			<td>
+				<c:choose>
+					<c:when test="${dto.questionPrivate == 1}">
+						<c:if test="${sessionScope.member.id == dto.id || sessionScope.member.id == 'admin'}">
+							<a href="javascript:articleQna('${dto.num}', '${pageNo}';)">${dto.subject}</a>
+						</c:if>
+						<c:if test="${sessionScope.memberid != dto.id && sessionScope.member.id != 'admin'}">${dto.subject}</c:if>
+					</c:when>
+					<c:otherwise>
+						<a href="javascript:articleQna('${dto.num}', '${pageNo}');">${dto.subject}</a>
+					</c:otherwise>
+				</c:choose>
+			</td>
 			<td>${dto.name}</td>
 			<td>${dto.created}</td>
 			<td>${dto.isAnswer == 1 ? "답변완료" : "답변대기"}</td>

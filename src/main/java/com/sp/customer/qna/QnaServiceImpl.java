@@ -41,8 +41,15 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public int dataCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.selectOne("qna.dataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		return 0;
+		return result;
 	}
 
 	@Override
@@ -56,6 +63,37 @@ public class QnaServiceImpl implements QnaService {
 		}
 		
 		return list;
+	}
+	
+	@Override
+	public Qna readQna(int num) {
+		Qna dto = null;
+		
+		try {
+			dto = dao.selectOne("qna.readQna", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public Qna readAnswer(int parent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Qna preReadQuestion(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Qna nextReadQuestion(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

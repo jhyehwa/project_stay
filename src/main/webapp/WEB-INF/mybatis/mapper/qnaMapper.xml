@@ -1,19 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="qna">
-	<select id="listQna" parameterType="map" resultType="Integer">
-		SELECT num, q.id, subject, questionPrivate, parent, created, categoryNum
-		FROM qna q
-		JOIN member m ON q.id = m.id
-	</select>
-	
+<mapper namespace="qna">	
 	<insert id="insertQna" parameterType="com.sp.customer.qna.Qna">
 		INSERT INTO qna(num, categoryNum, questionPrivate, subject, content, id, parent, created)
-		VALUES(qna_seq.CURRVAL, #{categoryNum}, #{questionPrivate}, #{subject}, #{content}, #{id}, #{parent, jdbcType=INTEGER}, SYSDATE)
+		VALUES(NEXTVAL(qna_seq), #{categoryNum}, #{questionPrivate}, #{subject}, #{content}, #{id}, COALESCE(parent), NOW())
 	</insert>
+	
+	<sql id="where-list">
+		<if test="condition == 'all'">
+			(INSTR(q.subject, #{keyword}) &gt; 0
+				OR INSTR(q.content, #{keyword}) &gt; 0)
+		</if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT IFNULL(COUNT(*), 0)
+		FROM qna q
+		JOIN member m ON q.id = m.id
+		<where>
+			q.parent IS NOT NULL
+			<if test="keyword != null and keyword != ''">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<select id="listQna" parameterType="map" resultType="com.sp.customer.qna.Qna">
+		SELECT q.num, name, q.id, q.subject, q.questionPrivate, q.parent, CASE WHEN q2.parent IS NULL THEN 0 ELSE 1 END AS isAnswer, q.created, q.categoryNum, category
+		FROM qna q
+		LEFT OUTER JOIN qna q2 ON q.num = q2.parent
+		JOIN member m ON q.id = m.id
+		JOIN qnaCategory qc ON q.categoryNum = qc.categoryNum
+		<where>
+			q.parent IS NOT NULL
+			<if test="keyword != null and keyword != ''">
+				AND <include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY num DESC
+		LIMIT #{rows} OFFSET #{offset}
+	</select>
 	
 	<select id="listCategory" resultType="com.sp.customer.qna.Qna">
 		SELECT categoryNum, category FROM qnaCategory
+	</select>
+	
+	<select id="readQna" parameterType="Integer" resultType="com.sp.customer.qna.Qna">
+		SELECT num, q.id, name, subject, content, parent, created, questionPrivate, q.categoryNum, category
+		FROM qna q
+		JOIN qnaCategory qc ON q.categoryNum = qc.categoryNum
+		JOIN member m ON q.id = m.id
+		WHERE num = #{num}
 	</select>
 </mapper>

@@ -172,6 +172,22 @@
 		};
 		ajaxFileJSON(url, "post", query, fn);
 	}
+	
+	// 글 보기
+	function articleQna(num, page) {
+		var $tab = $(".tabs .active");
+		var tab = $tab.attr("data-tab");
+		
+		var url = "<%=cp%>/customer/"+tab+"/article";
+		var query = "num=" + num;
+		var search = $('form[name=customerSearchForm]').serialize();
+		
+		query = query + "&pageNo=" + page + "&" + search;
+		
+		var selector = "#tab-content";
+		
+		ajaxHTML(url, "get", query, selector);
+	}
 </script>
 
 <div class="body-container" style="width: 800px;">
