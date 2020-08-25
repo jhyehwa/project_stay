@@ -16,4 +16,9 @@ public interface QnaService {
 	
 	public Qna preReadQuestion(Map<String, Object> map);
 	public Qna nextReadQuestion(Map<String, Object> map);
+	
+	public void updateQna(Qna dto) throws Exception;
+	
+	public void deleteQna(int num) throws Exception;
+	public void deleteAnswer(int num) throws Exception;
 }

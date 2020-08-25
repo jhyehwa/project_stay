@@ -164,4 +164,82 @@ public class QnaController {
 		
 		return "customer/qna/article";
 	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int num,
+			@RequestParam String pageNo,
+			HttpSession session,
+			Model model) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		Qna dto = service.readQna(num);
+		if (dto == null) {
+			return "customer/error";
+		}
+		
+		if (!info.getId().equals(dto.getId())) {
+			return "customer/error";
+		}
+		
+		List<Qna> listCategory = service.listCategory();
+		
+		model.addAttribute("mode", "update");
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("dto", dto);
+		model.addAttribute("listCategory", listCategory);
+		
+		return "customer/qna/created";
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateSubmit(Qna dto, HttpSession session) throws Exception {
+		String state = "true";
+		
+		try {
+			SessionInfo info = (SessionInfo) session.getAttribute("member");
+			dto.setId(info.getId());
+			service.updateQna(dto);
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> delete(
+			@RequestParam int num,
+			@RequestParam String mode,
+			HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		String state = "false";
+		
+		Qna dto = service.readQna(num);
+		if (dto != null) {
+			if (info.getId().equals(dto.getId()) || info.getId().equals("admin")) {
+				try {
+					if (mode.equals("question")) {
+						service.deleteQna(num);
+					} else if (mode.equals("answer")) {
+						service.deleteAnswer(num);
+					}
+					state = "true";
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
+	}
 }

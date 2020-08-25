@@ -188,16 +188,60 @@
 		
 		ajaxHTML(url, "get", query, selector);
 	}
+	
+	// 글 수정
+	function updateForm(num, page) {
+		var $tab = $(".tabs .active");
+		var tab = $tab.attr("data-tab");
+		
+		var url = "<%=cp%>/customer/"+tab+"/update";
+		var query;
+		
+		if(tab == "board") {
+			query = "boardNum=" + num;
+		} else {
+			query = "num=" + num;
+		}
+		
+		query = query + "&pageNo=" + page;
+		
+		var selector = "#tab-content";
+		
+		ajaxHTML(url, "get", query, selector);
+	}
+	
+	// 글 삭제
+	function deleteQna(num, page, mode) {
+		var $tab = $(".tabs .active");
+		var tab = $tab.attr("data-tab");
+		
+		var url = "<%=cp%>/customer/"+tab+"/delete";
+		
+		var query = "num=" + num;
+		if (tab == "qna") {
+			query += "&mode=" + mode;
+		}
+		
+		if (! confirm("위 게시물을 삭제하시겠습니까?")) {
+			return;
+		}
+		
+		var fn = function(data) {
+			listPage(page);
+		};
+		
+		ajaxJSON(url, "post", query, fn);
+	}
 </script>
 
-<div class="body-container" style="width: 800px;">
-	<div class="body-title">
-		<h3>고객센터</h3>
+<div class="body-container" style="width: 800px; background: aqua; margin-top: 50px;">
+	<div class="body-title" style="background: fuchsia; font-size: 20px;">
+		<span>고객센터</span>
 	</div>
 
-	<div>
-		<div style="clear: both;">
-			<ul class="tabs">
+	<div style="background: orange;">
+		<div>
+			<ul class="tabs" style="background: gray; list-style: none;">
 				<li id="tab-notice" data-tab="notice">공지사항</li>
 				<li id="tab-inquiry" data-tab="inquiry">1:1문의</li>
 				<li id="tab-qna" data-tab="qna">질문답변</li>

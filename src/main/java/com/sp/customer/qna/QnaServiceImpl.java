@@ -96,4 +96,39 @@ public class QnaServiceImpl implements QnaService {
 		return null;
 	}
 
+	@Override
+	public void updateQna(Qna dto) throws Exception {
+		
+		try {
+			dao.selectOne("qna.updateQna", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deleteQna(int num) throws Exception {
+		
+		try {
+			dao.deleteData("qna.deleteQna", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deleteAnswer(int num) throws Exception {
+		
+		try {
+			dao.deleteData("qna.deleteAnswer", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 }

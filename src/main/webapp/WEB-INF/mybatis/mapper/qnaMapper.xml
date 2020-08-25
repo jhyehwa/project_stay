@@ -53,4 +53,18 @@
 		JOIN member m ON q.id = m.id
 		WHERE num = #{num}
 	</select>
+	
+	<update id="updateQna" parameterType="com.sp.customer.qna.Qna">
+		UPDATE qna SET subject = #{subject}, content = #{content}, categoryNum = #{categoryNum}, questionPrivate = #{questionPrivate}
+		WHERE num = #{num} AND id = #{id}
+	</update>
+	
+	<delete id="deleteQna" parameterType="Integer">
+		DELETE FROM qna WHERE num IN
+			(SELECT num FROM qna START WITH num = #{num} CONNECT BY PRIOR num = parent)
+	</delete>
+	
+	<delete id="deleteAnswer" parameterType="Integer">
+		DELETE FROM qna WHERE num = #{num}
+	</delete>
 </mapper>
