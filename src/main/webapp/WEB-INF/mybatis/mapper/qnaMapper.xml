@@ -59,12 +59,12 @@
 		WHERE num = #{num} AND id = #{id}
 	</update>
 	
-	<delete id="deleteQna" parameterType="Integer">
+	<!-- <delete id="deleteQna" parameterType="Integer">
 		DELETE FROM qna WHERE num IN
-			(SELECT num FROM qna START WITH num = #{num} CONNECT BY PRIOR num = parent)
+			(SELECT num FROM qna WITH RECURSIVE num = #{num} CONNECT BY PRIOR num = parent)
 	</delete>
 	
 	<delete id="deleteAnswer" parameterType="Integer">
 		DELETE FROM qna WHERE num = #{num}
-	</delete>
+	</delete> -->
 </mapper>

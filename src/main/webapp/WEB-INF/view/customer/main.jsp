@@ -234,17 +234,17 @@
 	}
 </script>
 
-<div class="body-container" style="width: 800px; background: aqua; margin-top: 50px;">
-	<div class="body-title" style="background: fuchsia; font-size: 20px;">
+<div class="body-container" style="width: 100%; background: aqua; margin-top: 50px;">
+	<div class="body-title" style="background: fuchsia; font-size: 23px;">
 		<span>고객센터</span>
 	</div>
 
-	<div style="background: orange;">
-		<div>
-			<ul class="tabs" style="background: gray; list-style: none;">
-				<li id="tab-notice" data-tab="notice">공지사항</li>
-				<li id="tab-inquiry" data-tab="inquiry">1:1문의</li>
-				<li id="tab-qna" data-tab="qna">질문답변</li>
+	<div style="background: orange; width: 80%; margin: 0 auto;">
+		<div style="background: blue;">
+			<ul class="tabs" style="list-style: none; text-align: center; margin-top: 20px;">
+				<li id="tab-notice" data-tab="notice" style="float: left; width: 100px; height: 40px; font-size: 18px; background: lime;">공지사항</li>
+				<li id="tab-inquiry" data-tab="inquiry" style="float: left; width: 100px; height: 40px; font-size: 18px; background: purple;">1:1문의</li>
+				<li id="tab-qna" data-tab="qna" style="float: left; width: 100px; height: 40px; font-size: 18px; background: red;">질문답변</li>
 			</ul>
 		</div>
 		<div id="tab-content" style="clear: both; padding: 20px 10px 0px;"></div>
@@ -255,4 +255,3 @@
 	<input type="hidden" name="condition" value="all">
 	<input type="hidden" name="keyword" value="">
 </form>
-

@@ -6,14 +6,35 @@
 	String cp=request.getContextPath();
 %>
 
-<table style="margin-top: 50px;">
+<table>
 	<tr>
-		<th>번호</th>
-		<th>유형</th>
-		<th>제목</th>
-		<th>작성자</th>
-		<th>문의일자</th>
-		<th>처리결과</th>
+		<td>
+			<form name="searchForm" method="post">
+				<select>
+					<option>모두</option>
+					<option>제목</option>
+					<option>내용</option>
+					<option>작성자</option>
+					<option>작성일</option>
+				</select>
+				<input type="text">
+				<button type="button" style="width: 70px; height: 25px;" onclick="searchList();">검색</button>
+			</form>
+		</td>
+		<td>
+			<button type="button" style="width: 70px; height: 25px; margin-left: 625px;" onclick="insertForm();">글올리기</button>
+		</td>
+	</tr>
+</table>
+
+<table style="margin-top: 10px; background: lime; text-align: center;">
+	<tr style="background: yellow;">
+		<th style="width: 70px;">번호</th>
+		<th style="width: 150px;">유형</th>
+		<th style="width: 350px;">제목</th>
+		<th style="width: 150px;">작성자</th>
+		<th style="width: 150px;">문의일자</th>
+		<th style="width: 150px;">처리결과</th>
 	</tr>
 	
 	<c:forEach var = "dto" items="${list}">
@@ -40,32 +61,16 @@
 	</c:forEach>
 </table>
 
-<table>
+<table style="margin: 0 auto;">
 	<tr>
 		<td>${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</td>
 	</tr>
 </table>
 
-<table>
+<table style="background: white;">
 	<tr>
 		<td>
-			<button type="button" onclick="reloadQna();">새로고침</button>
-		</td>
-		<td>
-			<form name="searchForm" method="post">
-				<select>
-					<option>모두</option>
-					<option>제목</option>
-					<option>내용</option>
-					<option>작성자</option>
-					<option>작성일</option>
-				</select>
-				<input type="text">
-				<button type="button" onclick="searchList();">검색</button>
-			</form>
-		</td>
-		<td>
-			<button type="button" onclick="insertForm();">글올리기</button>
+			<button type="button" style="width: 70px; height: 25px;" onclick="reloadQna();">새로고침</button>
 		</td>
 	</tr>
 </table>
