@@ -6,7 +6,7 @@
 	String cp=request.getContextPath();
 %>
 
-<div style="width: 1200px; margin: 0 auto; background: lime;">
+<div class="body-container" style="width: 1200px; margin: 0 auto; height: 1800px;">
 	<div style="font-size: 50px; font-weight: bold; margin-top: 50px;">누구나 예쁜 집에 살 수 있도록</div>
 	<div style="margin-top: 30px; font-size: 20px;">우리는 원스톱 인테리어 플랫폼 ‘머무르다’를 통해 집을 꾸미는 방식을 새롭게 정의합니다.</div>
 	<div style="font-size: 20px;">이를 통해 누구나 쉽고 재미있게 자신의 공간을 만들어가는 문화가 널리 퍼지기를 꿈꿉니다.</div>

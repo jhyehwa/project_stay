@@ -6,8 +6,8 @@
 	String cp=request.getContextPath();
 %>
 
-<table>
-	<tr>
+<table style="background: lime;">
+	<tr style="background: red;">
 		<td>
 			<span>Q</span>
 			<span>[${qnaDto.category}] ${qnaDto.subject}</span>
