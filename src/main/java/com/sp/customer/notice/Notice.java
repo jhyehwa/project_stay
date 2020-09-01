@@ -10,8 +10,8 @@ public class Notice {
 	private String id;
 	private String name;
 	private String subject;
-	private int content;
-	private int created;
+	private String content;
+	private String created;
 	private int hitCount;
 	private int notice;
 
@@ -65,19 +65,19 @@ public class Notice {
 		this.subject = subject;
 	}
 
-	public int getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	public void setContent(int content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
-	public int getCreated() {
+	public String getCreated() {
 		return created;
 	}
 
-	public void setCreated(int created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
 

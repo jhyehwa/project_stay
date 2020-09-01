@@ -1,6 +1,8 @@
 package com.sp.customer.notice;
 
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +65,45 @@ public class NoticeController {
 			noticeList = service.listNoticeTop();
 		}
 		
-		return null;
+		int offset = (current_page - 1) * rows;
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		map.put("offset", offset);
+		map.put("rows", rows);
+		
+		List<Notice> list = service.listNotice(map);
+		
+		Date endDate = new Date();
+		long gap;
+		int listNum, n = 0;
+		for(Notice dto : list) {
+			listNum = dataCount - (offset + n);
+			dto.setListNum(listNum);
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+			Date beginDate = formatter.parse(dto.getCreated());
+			
+			gap = (endDate.getTime() - beginDate.getTime()) / (60 * 60 * 1000);
+			dto.setGap(gap);
+			dto.setCreated(dto.getCreated().substring(0, 10));
+			
+			n++;
+		}
+		
+		String paging = myUtil.pagingMethod(current_page, total_page, "listPage");
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("list", list);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+		
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
+		
+		return "customer/notice/list";
 	}
 }

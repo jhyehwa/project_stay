@@ -174,7 +174,7 @@
 	}
 	
 	// 글 보기
-	function articleQna(num, page) {
+	function articleBoard(num, page) {
 		var $tab = $(".tabs .active");
 		var tab = $tab.attr("data-tab");
 		
@@ -211,7 +211,7 @@
 	}
 	
 	// 글 삭제
-	function deleteQna(num, page, mode) {
+	function deleteBoard(num, page, mode) {
 		var $tab = $(".tabs .active");
 		var tab = $tab.attr("data-tab");
 		

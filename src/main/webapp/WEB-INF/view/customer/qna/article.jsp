@@ -59,7 +59,7 @@
 				<button type="button" onclick="updateForm('${qnaDto.num}', '${pageNo}');">질문수정</button>
 			</c:if>
 			<c:if test="${sessionScopt.member.id == questionDto.id || sessionScope.member.id == 'admin'}">
-				<button type="button" onclick="deleteQna('${qnaDto.num}', '${pageNo}', 'question');">질문삭제</button>
+				<button type="button" onclick="deleteBoard('${qnaDto.num}', '${pageNo}', 'question');">질문삭제</button>
 			</c:if>
 			<c:if test="${sessionScope.member.id == 'admin' && empty answerDto}">
 				<button type="button" onclick="replyForm('${qnaDto.num}', '${pageNo}');">답변</button>
@@ -68,7 +68,7 @@
 				<button type="button" onclick="updateForm('${answerDto.num}', '${pageNo}');">답변수정</button>
 			</c:if>
 			<c:if test="${not empty answerDto and sessionScope.member.id == 'admin'}">
-				<button type="button" onclick="deleteQna'${answerDto.num}', '${pageNo}', 'answer');">답변삭제</button>
+				<button type="button" onclick="deleteBoard'${answerDto.num}', '${pageNo}', 'answer');">답변삭제</button>
 			</c:if>
 		</td>
 		

@@ -45,12 +45,12 @@
 				<c:choose>
 					<c:when test="${dto.questionPrivate == 1}">
 						<c:if test="${sessionScope.member.id == dto.id || sessionScope.member.id == 'admin'}">
-							<a href="javascript:articleQna('${dto.num}', '${pageNo}';)">${dto.subject}</a>
+							<a href="javascript:articleBoard('${dto.num}', '${pageNo}';)">${dto.subject}</a>
 						</c:if>
 						<c:if test="${sessionScope.memberid != dto.id && sessionScope.member.id != 'admin'}">${dto.subject}</c:if>
 					</c:when>
 					<c:otherwise>
-						<a href="javascript:articleQna('${dto.num}', '${pageNo}');">${dto.subject}</a>
+						<a href="javascript:articleBoard('${dto.num}', '${pageNo}');">${dto.subject}</a>
 					</c:otherwise>
 				</c:choose>
 			</td>
@@ -70,7 +70,7 @@
 <table style="background: white;">
 	<tr>
 		<td>
-			<button type="button" style="width: 70px; height: 25px;" onclick="reloadQna();">새로고침</button>
+			<button type="button" style="width: 70px; height: 25px;" onclick="reloadBoard();">새로고침</button>
 		</td>
 	</tr>
 </table>

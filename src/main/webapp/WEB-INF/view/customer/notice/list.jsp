@@ -35,4 +35,24 @@
 			<td>${dto.hitCount}</td>
 		</tr>
 	</c:forEach>
+	
+	<c:forEach var="dto" items="${list}">
+		<tr>
+			<td>${dto.listNum}</td>
+			<td>
+				<a href="javascript:articleBoard('${dto.num}', '${pageNo}');">${dto.subject}</a>
+				<c:if test="${dto.gap < 1}">
+					<img src="">
+				</c:if>
+			</td>
+			<td>${dto.name}</td>
+			<td>${dto.created}</td>
+			<td>
+				<c:if test="${dto.fileCount > 0}">
+					<a href="<%=cp%>/customer/notice/zipdownload?num=${dto.num}"></a>
+				</c:if>
+			</td>
+			<td>${dto.hitCount}</td>
+		</tr>
+	</c:forEach>
 </table>
