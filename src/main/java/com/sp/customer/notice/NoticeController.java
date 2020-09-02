@@ -1,5 +1,6 @@
 package com.sp.customer.notice;
 
+import java.io.File;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,15 +9,19 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.common.FileManager;
 import com.sp.common.MyUtil;
+import com.sp.member.SessionInfo;
 
 @Controller("customer.noticeController")
 @RequestMapping("/customer/notice/*")
@@ -105,5 +110,39 @@ public class NoticeController {
 		model.addAttribute("keyword", keyword);
 		
 		return "customer/notice/list";
+	}
+	
+	@RequestMapping(value = "created", method = RequestMethod.GET)
+	public String createdForm(Model model) throws Exception {
+		model.addAttribute("pageNo", "1");
+		model.addAttribute("mode", "created");
+		
+		return "customer/notice/created";
+	}
+	
+	@RequestMapping(value = "created", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createdSubmit(Notice dto, HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String state = "false";
+		
+		if(info.getId().equals("admin")) {
+			try {
+				String root = session.getServletContext().getRealPath("/");
+				String pathName = root + "uploads" + File.separator + "notice";
+				
+				dto.setId(info.getId());
+				service.insertNotice(dto, pathName);
+				state = "true";
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
 	}
 }
