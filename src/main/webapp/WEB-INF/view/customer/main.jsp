@@ -130,7 +130,7 @@
 		ajaxHTML(url, "get", query, selector);
 	}
 
-	// 글 등록, 수정
+	// 글 등록, 수정, 답변등록
 	function sendOk(mode, page) {
 		var $tab = $(".tabs .active");
 		var tab = $tab.attr("data-tab");
@@ -170,6 +170,7 @@
 				listPage(page);
 			}
 		};
+		
 		ajaxFileJSON(url, "post", query, fn);
 	}
 	
@@ -231,6 +232,18 @@
 		};
 		
 		ajaxJSON(url, "post", query, fn);
+	}
+	
+	// 글 답변
+	function replyForm(num, page) {
+		var $tab = $(".tabs .active");
+		var tab = $tab.attr("data-tab");
+		
+		var url = "<%=cp%>/customer/"+tab+"/answer";
+		var query = "num=" + num + "&pageNo=" + page;
+		var selector = "#tab-content";
+		
+		ajaxHTML(url, "get", query, selector);
 	}
 </script>
 

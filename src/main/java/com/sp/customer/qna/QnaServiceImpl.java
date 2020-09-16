@@ -15,7 +15,7 @@ public class QnaServiceImpl implements QnaService {
 	private CommonDAO dao;
 
 	@Override
-	public List<Qna> listQna(Map<String, Object> map) {
+	public List<Qna> listBoard(Map<String, Object> map) {
 		List<Qna> list = null;
 
 		try {
@@ -28,7 +28,7 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public void insertQna(Qna dto) throws Exception {
+	public void insertBoard(Qna dto) throws Exception {
 
 		try {
 			dao.insertData("qna.insertQna", dto);
@@ -80,24 +80,48 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public Qna readAnswer(int parent) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Qna dto = null;
+		
+		try {
+			dto = dao.selectOne("qna.readAnswer", parent);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
 	@Override
 	public Qna preReadQuestion(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Qna dto = null;
+		
+		try{
+			dto = dao.selectOne("qna.preReadQuestion", map);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
 	@Override
 	public Qna nextReadQuestion(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Qna dto = null;
+		
+		try{
+			dto = dao.selectOne("qna.nextReadQuestion", map);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
 	@Override
-	public void updateQna(Qna dto) throws Exception {
+	public void updateBoard(Qna dto) throws Exception {
 		
 		try {
 			dao.selectOne("qna.updateQna", dto);
@@ -129,6 +153,40 @@ public class QnaServiceImpl implements QnaService {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+
+	@Override
+	public void insertCategory(Qna dto) throws Exception {
+		
+		try {
+			dao.insertData("qna.insertCategory", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public void updateCategory(Qna dto) throws Exception {
+		
+		try {
+			dao.updateData("qna.updateCategory", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public void deleteCategory(int categoryNum) throws Exception {
+		
+		try {
+			dao.deleteData("qna.deleteCategory", categoryNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
 	}
 
 }

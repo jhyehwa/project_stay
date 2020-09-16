@@ -64,7 +64,7 @@ public class QnaController {
 		map.put("offset", offset);
 		map.put("rows", rows);
 
-		List<Qna> list = service.listQna(map);
+		List<Qna> list = service.listBoard(map);
 
 		int listNum, n = 0;
 		for (Qna dto:list) {
@@ -89,6 +89,7 @@ public class QnaController {
 	
 	@RequestMapping(value = "created", method = RequestMethod.GET)
 	public String createdForm(Model model) throws Exception {
+		
 		List<Qna> listCategory = service.listCategory();
 
 		model.addAttribute("pageNo", "1");
@@ -101,12 +102,13 @@ public class QnaController {
 	@RequestMapping(value = "created", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdSubmit(Qna dto, HttpSession session) throws Exception {
+		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String state = "true";
 
 		try {
 			dto.setId(info.getId());
-			service.insertQna(dto);
+			service.insertBoard(dto);
 		} catch (Exception e) {
 			state = "false";
 		}
@@ -126,6 +128,7 @@ public class QnaController {
 			HttpServletRequest req,
 			HttpSession session,
 			Model model) throws Exception {
+		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		if (req.getMethod().equalsIgnoreCase("GET")) {
@@ -171,6 +174,7 @@ public class QnaController {
 			@RequestParam String pageNo,
 			HttpSession session,
 			Model model) throws Exception {
+		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		Qna dto = service.readQna(num);
@@ -195,17 +199,19 @@ public class QnaController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateSubmit(Qna dto, HttpSession session) throws Exception {
+		
 		String state = "true";
 		
 		try {
 			SessionInfo info = (SessionInfo) session.getAttribute("member");
 			dto.setId(info.getId());
-			service.updateQna(dto);
+			service.updateBoard(dto);
 		} catch (Exception e) {
 			state = "false";
 		}
 		
 		Map<String, Object> model = new HashMap<>();
+		
 		model.put("state", state);
 		
 		return model;
@@ -217,6 +223,7 @@ public class QnaController {
 			@RequestParam int num,
 			@RequestParam String mode,
 			HttpSession session) throws Exception {
+		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		String state = "false";
@@ -238,6 +245,59 @@ public class QnaController {
 		}
 		
 		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "answer", method = RequestMethod.GET)
+	public String answerForm(
+			@RequestParam int num,
+			@RequestParam String pageNo,
+			HttpSession session,
+			Model model) throws Exception {
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		Qna dto = service.readQna(num);
+		if(dto == null) {
+			return "customer/error";
+		}
+		
+		if(!info.getId().equals("admin")) {
+			return "customer/error";
+		}
+		
+		dto.setContent("[" + dto.getSubject() + "]에 대한 답변입니다.\n");
+		
+		List<Qna> listCategory = service.listCategory();
+		
+		model.addAttribute("mode", "answer");
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("dto", dto);
+		model.addAttribute("listCategory", listCategory);
+		
+		return "customer/qna/created";		
+	}
+	
+	@RequestMapping(value = "answer", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> answerSubmit(
+			Qna dto,
+			HttpSession session) throws Exception {
+		
+		String state = "true";
+		
+		try {
+			SessionInfo info = (SessionInfo) session.getAttribute("member");
+			dto.setId(info.getId());
+			service.insertBoard(dto);
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		
 		model.put("state", state);
 		
 		return model;

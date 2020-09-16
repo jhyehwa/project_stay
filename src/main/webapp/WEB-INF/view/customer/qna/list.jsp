@@ -10,14 +10,14 @@
 	<tr>
 		<td>
 			<form name="searchForm" method="post">
-				<select>
-					<option>모두</option>
-					<option>제목</option>
-					<option>내용</option>
-					<option>작성자</option>
-					<option>작성일</option>
+				<select id="condition" name="condition">
+					<option value="all" ${condition=="all"?"selected='selected'":""}>모두</option>
+					<option value="subject" ${condition=="subject"?"selected='selected'":""}>제목</option>
+					<option value="content" ${condition=="content"?"selected='selected'":""}>내용</option>
+					<option value="name" ${condition=="name"?"selected='selected'":""}>작성자</option>
+					<option value="created" ${condition=="created"?"selected='selected'":""}>작성일</option>
 				</select>
-				<input type="text">
+				<input type="text" id="keyword" name="keyword" value="${keyword}">
 				<button type="button" style="width: 70px; height: 25px;" onclick="searchList();">검색</button>
 			</form>
 		</td>
@@ -47,7 +47,7 @@
 						<c:if test="${sessionScope.member.id == dto.id || sessionScope.member.id == 'admin'}">
 							<a href="javascript:articleBoard('${dto.num}', '${pageNo}';)">${dto.subject}</a>
 						</c:if>
-						<c:if test="${sessionScope.memberid != dto.id && sessionScope.member.id != 'admin'}">${dto.subject}</c:if>
+						<c:if test="${sessionScope.member.id != dto.id && sessionScope.member.id != 'admin'}">${dto.subject}</c:if>
 					</c:when>
 					<c:otherwise>
 						<a href="javascript:articleBoard('${dto.num}', '${pageNo}');">${dto.subject}</a>

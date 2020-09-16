@@ -44,7 +44,7 @@
 	<select id="listNotice" parameterType="map" resultType="com.sp.customer.notice.Notice">
 		SELECT n.num, notice, n.id, name, subject, hitCount, created, IFNULL(fileCount, 0)
 		FROM notice n
-		JOIN member m ON n.iId = m.id
+		JOIN member m ON n.Id = m.id
 		LEFT OUTER JOIN (
 			SELECT num, COUNT(*) fileCount FROM noticeFile
 			GROUP BY num

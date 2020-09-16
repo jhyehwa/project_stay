@@ -145,4 +145,45 @@ public class NoticeController {
 		
 		return model;
 	}
+	
+	@RequestMapping(value = "article")
+	public String article(
+			@RequestParam int num,
+			@RequestParam String pageNo,
+			@RequestParam(defaultValue="all") String condition,
+			@RequestParam(defaultValue="") String keyword,
+			HttpServletRequest req,
+			Model model) throws Exception {
+		
+		if(req.getMethod().equalsIgnoreCase("GET")) {
+			keyword = URLDecoder.decode(keyword, "UTF-8");
+		}
+		
+		service.updateHitCount(num);
+		
+		Notice dto = service.readNotice(num);
+		if(dto == null) {
+			return "customer/error";
+		}
+		
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		map.put("num", num);
+		
+		Notice preReadDto = service.preReadNotice(map);
+		Notice nextReadDto = service.nextReadNotice(map);
+		
+		List<Notice> listFile = service.listFile(num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
+		model.addAttribute("listFile", listFile);
+		model.addAttribute("pageNo", pageNo);
+		
+		return "customer/notice/article";
+	}
 }

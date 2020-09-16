@@ -16,11 +16,11 @@
 						<c:forEach var = "vo" items="${listCategory}">
 							<option value="${vo.categoryNum}" ${vo.categoryNum == dto.categoryNum ?" selected = 'selected'" : ""}>${vo.category}</option>
 						</c:forEach>
-						
-						<c:if test="${(mode == 'update' && not empty dto.parent) || mode == 'answer'}">
-							<input type="hidden" name="categoryNum" value="${dto.categoryNum}">
-						</c:if>
 					</select>
+					
+					<c:if test="${(mode == 'update' && not empty dto.parent) || mode == 'answer'}">
+						<input type="hidden" name="categoryNum" value="${dto.categoryNum}">
+					</c:if>
 				</td>
 			</tr>
 			
