@@ -37,7 +37,7 @@
 		<th style="width: 150px;">처리결과</th>
 	</tr>
 	
-	<c:forEach var = "dto" items="${list}">
+	<c:forEach var="dto" items="${list}">
 		<tr>
 			<td>${dto.listNum}</td>
 			<td>${dto.category}</td>

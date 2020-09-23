@@ -42,7 +42,7 @@
 			<td>
 				<a href="javascript:articleBoard('${dto.num}', '${pageNo}');">${dto.subject}</a>
 				<c:if test="${dto.gap < 1}">
-					<img src="">
+					<img src="<%=cp%>/resource/images/new.gif">
 				</c:if>
 			</td>
 			<td>${dto.name}</td>

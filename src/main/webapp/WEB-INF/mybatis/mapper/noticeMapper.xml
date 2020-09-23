@@ -12,14 +12,27 @@
 	</insert>
 	
 	<sql id="where-list">
-		<if test="condition == 'all'">
-			(INSTR(q.subject, #{keyword}) &gt; 0
-				OR INSTR(q.content, #{keyword}) &gt; 0)
+		<if test="condition=='all' ">
+			( INSTR(subject, #{keyword}) &gt; 0
+				OR DBMS_LOB.INSTR(content, #{keyword}) &gt; 0 )
+		</if>
+		<if test="condition=='subject' ">
+			INSTR(subject, #{keyword}) &gt; 0
+		</if>
+		<if test="condition=='content' ">
+			DBMS_LOB.INSTR( content, #{keyword}) &gt; 0 
+		</if>
+		<if test="condition=='userName' ">
+			name = #{keyword}
+		</if>
+		<if test="condition=='created' ">
+			( DATE_FORMAT(created, '%Y-%m-%d') = #{keyword}
+				OR DATE_FORMAT(created, '%Y-%m-%d') = #{keyword} )
 		</if>
 	</sql>
 	
 	<select id="listNoticeTop" resultType="com.sp.customer.notice.Notice">
-		SELECT n.num, notice, n.id, name, subject, hitCount, created, IFNULL(fileCount, 0)
+		SELECT n.num, notice, n.id, name, subject, hitCount, DATE_FORMAT(n.created, '%Y-%m-%d') created, IFNULL(fileCount, 0)
 		FROM notice n
 		JOIN member m ON n.id = m.id
 		LEFT OUTER JOIN (
@@ -54,7 +67,7 @@
 				<include refid="where-list"/>
 			</if>
 		</where>
-		<!-- ORDER BY num DESC
-		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY -->
+		ORDER BY num DESC
+		LIMIT #{rows} OFFSET #{offset}
 	 </select>
 </mapper>

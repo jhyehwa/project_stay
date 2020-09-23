@@ -96,7 +96,7 @@ public class QnaController {
 		model.addAttribute("listCategory", listCategory);
 		model.addAttribute("mode", "created");
 
-		return ".customer.qna.created";
+		return "customer/qna/created";
 	}
 
 	@RequestMapping(value = "created", method = RequestMethod.POST)
@@ -211,7 +211,6 @@ public class QnaController {
 		}
 		
 		Map<String, Object> model = new HashMap<>();
-		
 		model.put("state", state);
 		
 		return model;
@@ -297,7 +296,6 @@ public class QnaController {
 		}
 		
 		Map<String, Object> model = new HashMap<>();
-		
 		model.put("state", state);
 		
 		return model;

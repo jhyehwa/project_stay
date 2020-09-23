@@ -22,8 +22,8 @@
 			userName=#{keyword}
 		</if>
 		<if test="condition == 'created'">
-			( TO_CHAR(q.created, 'YYYY-MM-DD') = #{keyword}
-				OR TO_CHAR(q.created, 'YYYYMMDD') = #{keyword} )
+			( DATE_FORMAT(q.created, '%Y-%m-%d') = #{keyword}
+				OR DATE_FORMAT(q.created, '%Y-%m-%d') = #{keyword} )
 	   </if>
 	</sql>
 	
@@ -40,7 +40,7 @@
 	</select>
 	
 	<select id="listQna" parameterType="map" resultType="com.sp.customer.qna.Qna">
-		SELECT q.num, name, q.id, q.subject, q.questionPrivate, q.parent, CASE WHEN q2.parent IS NULL THEN 0 ELSE 1 END AS isAnswer, q.created, q.categoryNum, category
+		SELECT q.num, name, q.id, q.subject, q.questionPrivate, q.parent, CASE WHEN q2.parent IS NULL THEN 0 ELSE 1 END AS isAnswer, DATE_FORMAT(q.created, '%Y-%m-%d') created, q.categoryNum, category
 		FROM qna q
 		LEFT OUTER JOIN qna q2 ON q.num = q2.parent
 		JOIN member m ON q.id = m.id
@@ -56,7 +56,7 @@
 	</select>
 	
 	<select id="readQna" parameterType="Integer" resultType="com.sp.customer.qna.Qna">
-		SELECT num, q.id, name, subject, content, parent, created, questionPrivate, q.categoryNum, category
+		SELECT q.num, q.id, name, q.subject, q.content, q.parent, q.created, q.questionPrivate, q.categoryNum, category
 		FROM qna q
 		JOIN qnaCategory qc ON q.categoryNum = qc.categoryNum
 		JOIN member m ON q.id = m.id
